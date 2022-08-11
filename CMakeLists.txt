@@ -4,6 +4,9 @@ project(ceph
   VERSION 17.0.0
   LANGUAGES CXX C ASM)
 
+SET(ENV{OPENSSL_ROOT_DIR} /usr/local/Cellar/openssl@3/3.0.2)
+SET(ENV{LUA_DIR} /usr/local/Cellar/lua@5.3/5.3.6)
+
 cmake_policy(SET CMP0028 NEW)
 cmake_policy(SET CMP0046 NEW)
 cmake_policy(SET CMP0048 NEW)
@@ -149,7 +152,7 @@ if(NOT HAVE_CXX11_ATOMIC)
     " ${LIBATOMIC_LINK_FLAGS}")
 endif()
 
-option(WITH_RDMA "Enable RDMA in async messenger" ON)
+option(WITH_RDMA "Enable RDMA in async messenger" OFF)
 if(WITH_RDMA)
   find_package(verbs REQUIRED)
   set(HAVE_VERBS ${VERBS_FOUND})
@@ -212,7 +215,7 @@ if(WITH_ZFS)
   set(HAVE_LIBZFS ${ZFS_FOUND})
 endif()
 
-option(WITH_BLUESTORE "Bluestore OSD backend" ON)
+option(WITH_BLUESTORE "Bluestore OSD backend" OFF)
 if(WITH_BLUESTORE)
   if(LINUX)
     find_package(aio)
@@ -316,7 +319,7 @@ endif()
 # key-value store
 option(WITH_KVS "Key value store is here" OFF)
 
-option(WITH_KRBD "Enable Linux krbd support of 'rbd' utility" ON)
+option(WITH_KRBD "Enable Linux krbd support of 'rbd' utility" OFF)
 
 if(WITH_KRBD AND NOT WITH_RBD)
   message(FATAL_ERROR "Cannot have WITH_KRBD without WITH_RBD.")
@@ -420,13 +423,13 @@ if(WITH_BLKIN)
   include_directories(SYSTEM src/blkin/blkin-lib)
 endif(WITH_BLKIN)
 
-option(WITH_JAEGER "Enable jaegertracing and it's dependent libraries" ON)
+option(WITH_JAEGER "Enable jaegertracing and it's dependent libraries" OFF)
 if(WITH_JAEGER)
   set(HAVE_JAEGER TRUE)
 endif()
 
 #option for RGW
-option(WITH_RADOSGW "Rados Gateway is enabled" ON)
+option(WITH_RADOSGW "Rados Gateway is enabled" OFF)
 option(WITH_RADOSGW_BEAST_OPENSSL "Rados Gateway's Beast frontend uses OpenSSL" ON)
 option(WITH_RADOSGW_AMQP_ENDPOINT "Rados Gateway's pubsub support for AMQP push endpoint" ON)
 option(WITH_RADOSGW_KAFKA_ENDPOINT "Rados Gateway's pubsub support for Kafka push endpoint" ON)
@@ -500,7 +503,7 @@ set(WITH_PYTHON3 "3" CACHE STRING "build with specified python3 version")
 find_package(Python3 ${WITH_PYTHON3} EXACT REQUIRED
   COMPONENTS Interpreter Development)
 
-option(WITH_MGR "ceph-mgr is enabled" ON)
+option(WITH_MGR "ceph-mgr is enabled" OFF)
 if(WITH_MGR)
   set(MGR_PYTHON_EXECUTABLE ${Python3_EXECUTABLE})
   set(MGR_PYTHON_LIBRARIES ${Python3_LIBRARIES})
@@ -529,7 +532,7 @@ CMAKE_DEPENDENT_OPTION(
   OFF "USE_LTTNG" OFF)
 
 #option for LTTng
-option(WITH_LTTNG "LTTng tracing is enabled" ON)
+option(WITH_LTTNG "LTTng tracing is enabled" OFF)
 if(${WITH_LTTNG})
   find_package(LTTngUST REQUIRED)
   find_program(LTTNG_GEN_TP
@@ -542,7 +545,7 @@ endif(${WITH_LTTNG})
 option(WITH_OSD_INSTRUMENT_FUNCTIONS OFF)
 
 #option for Babeltrace
-option(WITH_BABELTRACE "Babeltrace libraries are enabled" ON)
+option(WITH_BABELTRACE "Babeltrace libraries are enabled" OFF)
 if(WITH_BABELTRACE)
   set(HAVE_BABELTRACE ON)
   find_package(babeltrace REQUIRED)
@@ -555,7 +558,7 @@ option(DEBUG_GATHER "C_Gather debugging is enabled" ON)
 option(ENABLE_COVERAGE "Coverage is enabled" OFF)
 option(PG_DEBUG_REFS "PG Ref debugging is enabled" OFF)
 
-option(WITH_TESTS "enable the build of ceph-test package scripts/binaries" ON)
+option(WITH_TESTS "enable the build of ceph-test package scripts/binaries" OFF)
 set(UNIT_TESTS_BUILT ${WITH_TESTS})
 set(CEPH_TEST_TIMEOUT 3600 CACHE STRING 
   "Maximum time before a CTest gets killed" )
