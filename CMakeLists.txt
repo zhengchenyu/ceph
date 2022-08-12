@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 3.5.1)
 project(ceph CXX C ASM)
 set(VERSION 14.2.7)
 
+SET(ENV{OPENSSL_ROOT_DIR} /usr/local/Cellar/openssl@3/3.0.2)
+SET(WITH_PYTHON3 ON)
+SET(WITH_PYTHON2 OFF)
+
 if(POLICY CMP0028)
   cmake_policy(SET CMP0028 NEW)
 endif()
@@ -199,7 +203,7 @@ if(NOT HAVE_CXX11_ATOMIC)
     "${CMAKE_CXX_STANDARD_LIBRARIES} ${LIBATOMIC_LINK_FLAGS}")
 endif()
 
-option(WITH_RDMA "Enable RDMA in async messenger" ON)
+option(WITH_RDMA "Enable RDMA in async messenger" OFF)
 if(WITH_RDMA)
   find_package(verbs REQUIRED)
   set(HAVE_VERBS ${VERBS_FOUND})
@@ -269,7 +273,7 @@ if(WITH_ZFS)
   set(HAVE_LIBZFS ${ZFS_FOUND})
 endif()
 
-option(WITH_BLUESTORE "Bluestore OSD backend" ON)
+option(WITH_BLUESTORE "Bluestore OSD backend" OFF)
 if(WITH_BLUESTORE)
   if(LINUX)
     find_package(aio)
@@ -315,13 +319,13 @@ if(WITH_QATZIP)
 endif(WITH_QATZIP)
 
 # needs mds and? XXX
-option(WITH_LIBCEPHFS "libcephfs client library" ON)
+option(WITH_LIBCEPHFS "libcephfs client library" OFF)
 
 # key-value store
 option(WITH_KVS "Key value store is here" ON)
 
 # KERNEL remote block storage
-option(WITH_KRBD "Kernel Remote block storage is here" ON)
+option(WITH_KRBD "Kernel Remote block storage is here" OFF)
 
 if(WITH_KRBD AND WITHOUT_RBD)
   message(FATAL_ERROR "Cannot have WITH_KRBD with WITH_RBD.")
@@ -440,7 +444,7 @@ if(WITH_BOOST_CONTEXT)
 endif()
 
 #option for RGW
-option(WITH_RADOSGW "Rados Gateway is enabled" ON)
+option(WITH_RADOSGW "Rados Gateway is enabled" OFF)
 option(WITH_RADOSGW_FCGI_FRONTEND "Rados Gateway's FCGI frontend is enabled" OFF)
 option(WITH_RADOSGW_BEAST_FRONTEND "Rados Gateway's Beast frontend is enabled" ON)
 option(WITH_RADOSGW_BEAST_OPENSSL "Rados Gateway's Beast frontend uses OpenSSL" ON)
@@ -520,7 +524,7 @@ endif (WITH_RADOSGW)
 option(WITH_CEPHFS "CephFS is enabled" ON)
 
 #option for Mgr
-option(WITH_MGR "ceph-mgr is enabled" ON)
+option(WITH_MGR "ceph-mgr is enabled" OFF)
 if(WITH_MGR)
   # Please specify 3 or 3.[0-7] if you want to build with python3 support.
   # FindPyhonInterp and FindPythonLibs think they belong to different families.
@@ -554,7 +558,7 @@ find_package(ZLIB REQUIRED)
 option(WITH_EVENTTRACE "Event tracing support" OFF)
 
 #option for LTTng
-option(WITH_LTTNG "LTTng tracing is enabled" ON)
+option(WITH_LTTNG "LTTng tracing is enabled" OFF)
 if(${WITH_LTTNG})
   find_package(LTTngUST REQUIRED)
   find_program(LTTNG_GEN_TP
@@ -567,7 +571,7 @@ endif(${WITH_LTTNG})
 option(WITH_OSD_INSTRUMENT_FUNCTIONS OFF)
 
 #option for Babeltrace
-option(WITH_BABELTRACE "Babeltrace libraries are enabled" ON)
+option(WITH_BABELTRACE "Babeltrace libraries are enabled" OFF)
 if(WITH_BABELTRACE)
   set(HAVE_BABELTRACE ON)
   find_package(babeltrace REQUIRED)
@@ -580,7 +584,7 @@ option(DEBUG_GATHER "C_Gather debugging is enabled" ON)
 option(ENABLE_COVERAGE "Coverage is enabled" OFF)
 option(PG_DEBUG_REFS "PG Ref debugging is enabled" OFF)
 
-option(WITH_TESTS "enable the build of ceph-test package scripts/binaries" ON)
+option(WITH_TESTS "enable the build of ceph-test package scripts/binaries" OFF)
 set(UNIT_TESTS_BUILT ${WITH_TESTS})
 set(CEPH_TEST_TIMEOUT 3600 CACHE STRING 
   "Maximum time before a CTest gets killed" )

@@ -22,6 +22,9 @@ else (NSPR_LIBRARIES AND NSPR_INCLUDE_DIRS)
   if (PKG_CONFIG_FOUND)
     pkg_check_modules(_NSPR nspr)
   endif (PKG_CONFIG_FOUND)
+  SET(_NSPR_INCLUDEDIR /usr/local/Cellar/nspr/4.34.1/include)
+  SET(_NSPR_LIBDIR /usr/local/Cellar/nspr/4.34.1/lib)
+
 
   find_path(NSPR_INCLUDE_DIR
     NAMES

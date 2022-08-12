@@ -22,6 +22,8 @@ else (NSS_LIBRARIES AND NSS_INCLUDE_DIRS)
   if (PKG_CONFIG_FOUND)
     pkg_check_modules(_NSS nss)
   endif (PKG_CONFIG_FOUND)
+  SET(_NSS_INCLUDEDIR /usr/local/Cellar/nss/3.76/include)
+  SET(_NSS_LIBDIR /usr/local/Cellar/nss/3.76/lib)
 
   find_path(NSS_INCLUDE_DIR
     NAMES
