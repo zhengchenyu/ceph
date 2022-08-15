@@ -686,7 +686,7 @@ include_directories(BEFORE SYSTEM ${Boost_INCLUDE_DIRS})
 set(Boost_USE_MULTITHREADED ON)
 
 # dashboard angular2 frontend
-option(WITH_MGR_DASHBOARD_FRONTEND "Build the mgr/dashboard frontend using `npm`" ON)
+option(WITH_MGR_DASHBOARD_FRONTEND "Build the mgr/dashboard frontend using `npm`" OFF)
 option(WITH_SYSTEM_NPM "Assume that dashboard build tools already installed through packages" OFF)
 if(WITH_SYSTEM_NPM)
   find_program(NPM npm)
