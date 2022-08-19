@@ -623,6 +623,7 @@ install(PROGRAMS
 
 add_subdirectory(bash_completion)
 add_subdirectory(client)
+add_subdirectory(examples)
 
 if(WITH_LIBCEPHFS)
   find_package(PkgConfig QUIET REQUIRED)
