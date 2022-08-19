@@ -60,6 +60,7 @@ GTAGS
 # common cmake build dir
 /build
 /build.*
+/cmake-build-docker-debug
 
 # editor backup files etc.
 \#*\#
