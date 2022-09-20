@@ -284,7 +284,7 @@ if(WITH_OCF)
   add_subdirectory(ocf)
 endif()
 
-option(WITH_CEPHFS_JAVA "build libcephfs Java bindings" OFF)
+option(WITH_CEPHFS_JAVA "build libcephfs Java bindings" ON)
 if(WITH_CEPHFS_JAVA)
   add_subdirectory(java)
 endif()
