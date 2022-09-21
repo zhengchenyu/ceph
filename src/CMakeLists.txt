@@ -286,6 +286,11 @@ endif()
 
 option(WITH_CEPHFS_JAVA "build libcephfs Java bindings" ON)
 if(WITH_CEPHFS_JAVA)
+  set(JAVA_AWT_LIBRARY "$ENV{JAVA_HOME}/jre/lib/amd64/libjawt.so")
+  set(JAVA_JVM_LIBRARY "$ENV{JAVA_HOME}/jre/lib/amd64/server/libjvm.so")
+  set(JAVA_INCLUDE_PATH "$ENV{JAVA_HOME}/include")
+  set(JAVA_INCLUDE_PATH2 "$ENV{JAVA_HOME}/include/linux")
+  set(JAVA_AWT_INCLUDE_PATH "$ENV{JAVA_HOME}/include")
   add_subdirectory(java)
 endif()
 
