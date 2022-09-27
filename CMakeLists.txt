@@ -4,6 +4,11 @@ project(ceph
   VERSION 17.0.0
   LANGUAGES CXX C ASM)
 
+set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -Wall -g")
+set(CMAKE_CXX_FLAGS "-O0 -Wall -g")
+set(CMAKE_C_FLAGS "-O0 -Wall -g ")
+
 cmake_policy(SET CMP0028 NEW)
 cmake_policy(SET CMP0046 NEW)
 cmake_policy(SET CMP0048 NEW)
