@@ -7,11 +7,6 @@ project(ceph
 SET(ENV{OPENSSL_ROOT_DIR} /usr/local/Cellar/openssl@3/3.0.2)
 SET(ENV{LUA_DIR} /usr/local/Cellar/lua@5.3/5.3.6)
 
-set(CMAKE_BUILD_TYPE "Debug")
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -Wall -g")
-set(CMAKE_CXX_FLAGS "-O0 -Wall -g")
-set(CMAKE_C_FLAGS "-O0 -Wall -g ")
-
 cmake_policy(SET CMP0028 NEW)
 cmake_policy(SET CMP0046 NEW)
 cmake_policy(SET CMP0048 NEW)
