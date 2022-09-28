@@ -510,7 +510,7 @@ set(WITH_PYTHON3 "3" CACHE STRING "build with specified python3 version")
 find_package(Python3 ${WITH_PYTHON3} EXACT REQUIRED
   COMPONENTS Interpreter Development)
 
-option(WITH_MGR "ceph-mgr is enabled" OFF)
+option(WITH_MGR "ceph-mgr is enabled" ON)
 if(WITH_MGR)
   set(MGR_PYTHON_EXECUTABLE ${Python3_EXECUTABLE})
   set(MGR_PYTHON_LIBRARIES ${Python3_LIBRARIES})
