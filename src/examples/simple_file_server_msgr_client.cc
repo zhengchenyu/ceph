@@ -114,11 +114,7 @@ int main(int argc, const char **argv) {auto args = argv_to_vec(argc, argv);
   ConnectionRef c2s = client_msgr->connect_to(CEPH_ENTITY_TYPE_OSD,entity_addrvec_t{bind_addr});
   sleep(10);
   MCommand *fom = new MCommand();
-  fom->cmd = {"/root/ceph/simple-file-server-1"
-              ""
-              ""
-              ""
-              ".txt", "I am writting by simple file server!"};
+  fom->cmd = {"/root/ceph/simple-file-server.txt", "I am writting by simple file server!"};
   for (int i = 0; i < 1; i++) {
     c2s->send_message(fom);
     sleep(1);
